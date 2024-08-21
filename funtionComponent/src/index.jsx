@@ -1,4 +1,4 @@
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import "./index.css";
 
 
@@ -6,6 +6,21 @@ const para1 = <p className="bg-red-700">Lorem ipsum dolor sit amet consectetur a
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
+const ApiData = [
+    {
+        name:"siva",
+        age:"17"
+    },
+    {
+        name:"ram",
+        age:"13"
+    },
+    {
+        name:"sivanesan",
+        age:"21"
+    }
+
+]
 
 const Header = () => {
     return (
@@ -41,6 +56,22 @@ const FootSection = () => {
     )
 }
 
+
+const Card = (props)=>{
+    return(
+        <>
+            <div className="m-7 grid ">
+                <p>
+                    {props.name}
+                </p>    
+                <p>
+                    {props.age}
+                </p>
+            </div>
+        </>
+    )
+}
+
 const RappperSection = () => {
     return (
         <>
@@ -49,6 +80,15 @@ const RappperSection = () => {
             <Header /> 
             <HeroSection /> 
             <FootSection />
+            {
+                ApiData.map((x)=>{
+                    return <Card name={x.name} age={x.age} />
+                }
+                )
+            }
+            
+            
+
             </div>
             </div>
         </>
