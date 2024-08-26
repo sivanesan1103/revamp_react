@@ -4,13 +4,11 @@ import Header from "./components/Header/Header";
 import { ApiData } from "./api/dummyData";
 import FootSection from "./components/Footer/Footer";
 import { HeroSection } from "./components/Herosection/Herosection";
-import { Card } from "./components/Card/Card";
 import { Counter_main } from "./components/Counter/Counter";
 import { Suspense } from "react";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { ErrorPage } from "./components/Error/Error";
-import { lazy } from "react";
-
+import { Body } from "./components/Body/Body";
 
 
 
@@ -23,22 +21,13 @@ const WrapperSection = () => {
             <div className="w-[70%] mx-auto">
                 <Header />
                 <Outlet />
-                <FootSection />
+                {/* <FootSection /> */}
             </div>
         </div>
     );
 };
 
 
-const CardPage = () => {
-    return (
-        <div>
-            {ApiData.map((x, index) => (
-                <Card key={index} name={x.name} age={x.age} />
-            ))}
-        </div>
-    );
-};
 
 const AppRouter = createBrowserRouter([
     {
@@ -46,25 +35,14 @@ const AppRouter = createBrowserRouter([
         element: <WrapperSection />,
         children: [
             {
-                path: "/form",
+                path: "/",
                 element: (
-                    <Suspense fallback={<div>Loading...</div>}>
-                        <FormComponent />
-                    </Suspense>
+                 
+                        <Body/>
+         
                 ),
             },
-            {
-                path: "/hero",
-                element: <HeroSection />,
-            },
-            {
-                path: "/card",
-                element: <CardPage />,
-            },
-            {
-                path: "/counter",
-                element: <Counter_main />,
-            },
+           
         ],
         errorElement: <ErrorPage />,
     },
