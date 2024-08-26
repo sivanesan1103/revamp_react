@@ -6,55 +6,68 @@ import FootSection from "./components/Footer/Footer";
 import { HeroSection } from "./components/Herosection/Herosection";
 import { Card } from "./components/Card/Card";
 import { Counter_main } from "./components/Counter/Counter";
-import { useState  } from "react";
+import { Suspense } from "react";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { ErrorPage } from "./components/Error/Error";
+import { lazy } from "react";
+
+
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 
-const WappperSection = () => {
+const WrapperSection = () => {
     return (
-        <>
         <div className="mx-auto 2xl:container">
             <div className="w-[70%] mx-auto">
-            <Header /> 
-                <Outlet/>
-            <FootSection />
+                <Header />
+                <Outlet />
+                <FootSection />
             </div>
-            </div>
-        </>
-    )
-}
+        </div>
+    );
+};
 
-const Approuter = createBrowserRouter([
+
+const CardPage = () => {
+    return (
+        <div>
+            {ApiData.map((x, index) => (
+                <Card key={index} name={x.name} age={x.age} />
+            ))}
+        </div>
+    );
+};
+
+const AppRouter = createBrowserRouter([
     {
-        element:<WappperSection/>,
-        path:"/",
-        children:[
+        path: "/",
+        element: <WrapperSection />,
+        children: [
             {
-                element:<HeroSection />,
-                path:"/hero" 
-            },
-            {
-                element: ApiData.map((x,index)=>{
-                    return <Card key={index} name={x.name} age={x.age} />
-                }
+                path: "/form",
+                element: (
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <FormComponent />
+                    </Suspense>
                 ),
-                path:"/card"
             },
             {
-                element:<Counter_main />,
-                path:"/counter"
-            }
-       
-
+                path: "/hero",
+                element: <HeroSection />,
+            },
+            {
+                path: "/card",
+                element: <CardPage />,
+            },
+            {
+                path: "/counter",
+                element: <Counter_main />,
+            },
         ],
         errorElement: <ErrorPage />,
-    }
-])
+    },
+]);
 
-
-
-root.render(<RouterProvider router={Approuter} />);
-
+root.render(<RouterProvider router={AppRouter} />);
