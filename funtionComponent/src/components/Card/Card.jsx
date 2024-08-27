@@ -1,49 +1,51 @@
-
-
-
 const img_1 = "https://ik.imagekit.io/sivanesan/default-image.jpg?updatedAt=1718705705744";
+
 export const Card = (props) => {
-    return (
-        <>
-            {/* <p>{props.test}</p> */}
-            <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm ">
-                <div class="h-56 w-full">
-                    <a href="#">
-                        <img class="mx-auto h-full" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg" alt="" />
-                      
-                    </a>
-                </div>
-                <div class="pt-6">
-                    <div class="mb-4 flex items-center justify-between gap-4">
-                        <span class="me-2 rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-300"> Up to 35% off </span>
-
-                        <div class="flex items-center justify-end gap-1">
-                            <button type="button" data-tooltip-target="tooltip-quick-look" class="rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                <span class="sr-only"> Quick look </span>
-                                <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z" />
-                                    <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                </svg>
-                            </button>
-                            <div id="tooltip-quick-look" role="tooltip" class="tooltip invisible absolute z-10 inline-block rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700" data-popper-placement="top">
-                                Quick look
-                                <div class="tooltip-arrow" data-popper-arrow=""></div>
-                            </div>
-
-                            <button type="button" data-tooltip-target="tooltip-add-to-favorites" class="rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                <span class="sr-only"> Add to Favorites </span>
-                                <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6C6.5 1 1 8 5.8 13l6.2 7 6.2-7C23 8 17.5 1 12 6Z" />
-                                </svg>
-                            </button>
-                            <div id="tooltip-add-to-favorites" role="tooltip" class="tooltip invisible absolute z-10 inline-block rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700" data-popper-placement="top">
-                                Add to favorites
-                                <div class="tooltip-arrow" data-popper-arrow=""></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </div>
-            </>
-            )
-}
+  return (
+    <>
+      {/* <p>{props.test}</p> */}
+      <div className="max-w-sm">
+        <a href="#">
+          <img
+            src={ props.img || img_1}
+            alt={props.img}
+            className="w-full h-auto"
+          />
+        <h5 className="text-xl font-semibold tracking-tight text-gray-900">
+          Apple Watch Series 7 GPS, Aluminium Case, Starlight Sport
+        </h5>
+        </a>
+        <div className="mb-5 mt-2.5 flex items-center">
+          {Array(5)
+            .fill("")
+            .map((_, index) => (
+              <svg
+                key={index}
+                className="w-5 h-5 text-yellow-300"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            ))}
+          <span className="ml-3 mr-2 rounded bg-cyan-100 px-2.5 py-0.5 text-xs font-semibold text-cyan-800 ">
+            5.0
+          </span>
+        </div>
+        <div className="flex items-center justify-between">
+          <span className="text-3xl font-bold text-gray-900 dark:text-white">
+            {props.price}
+          </span>
+          <a
+            
+            className="rounded-lg bg-cyan-700 px-5 py-2.5 text-center text-sm font-medium  hover:bg-cyan-800 focus:outline-none focus:ring-4 focus:ring-cyan-300 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800"
+          onClick={()=>{props.id}}
+          >
+            Add to cart
+          </a>
+        </div>
+      </div>
+    </>
+  );
+};
